@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from flask_smorest import Api
 from dotenv import load_dotenv
 
 from db import db
@@ -33,3 +34,10 @@ def create_app():
 
 
 app = create_app()
+
+app.config["API_TITLE"] = "FC Manager REST API"
+app.config["API_VERSION"] = "v1"
+app.config["OPENAPI_VERSION"] = "3.0.3"
+app.config["OPENAPI_URL_PREFIX"] = "/"
+
+api = Api(app)
