@@ -2,9 +2,12 @@ import os
 from flask import Flask
 from flask_smorest import Api
 from dotenv import load_dotenv
-
 from db import db
-
+from resources.team import blp as TeamBlueprint
+from resources.club import blp as ClubBlueprint
+from resources.player import blp as PlayerBlueprint
+from resources.user import blp as UserBlueprint
+from flask_migrate import Migrate
 
 load_dotenv()
 
@@ -24,8 +27,18 @@ def create_app():
     )
     # disables the Flask-SQLAlchemy event system, improving performance.
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config["API_TITLE"] = "FC Manager REST API"
+    app.config["API_VERSION"] = "v1"
+    app.config["OPENAPI_VERSION"] = "3.0.3"
+    app.config["OPENAPI_URL_PREFIX"] = "/"
 
     db.init_app(app)
+    api = Api(app)
+
+    api.register_blueprint(TeamBlueprint)
+    api.register_blueprint(PlayerBlueprint)
+    api.register_blueprint(ClubBlueprint)
+    api.register_blueprint(UserBlueprint)
 
     with app.app_context():
         db.create_all()
@@ -35,9 +48,4 @@ def create_app():
 
 app = create_app()
 
-app.config["API_TITLE"] = "FC Manager REST API"
-app.config["API_VERSION"] = "v1"
-app.config["OPENAPI_VERSION"] = "3.0.3"
-app.config["OPENAPI_URL_PREFIX"] = "/"
-
-api = Api(app)
+migrate = Migrate(app, db)
