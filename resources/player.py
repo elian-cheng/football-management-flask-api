@@ -10,11 +10,12 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 blp = Blueprint("players", __name__, description="Operations on the players")
 
 
-# @blp.route("/players/<int:player_id>")
-# class Player(MethodView):
-#     @blp.response(200, PlayerSchema)
-#     def get(self, player_id):
-#         return PlayerModel.query.get_or_404(player_id)
+@blp.route("/players/<int:player_id>")
+class Player(MethodView):
+    @blp.response(200, PlayerSchema)
+    def get(self, player_id):
+        return PlayerModel.query.get_or_404(player_id)
+
 
 #     @jwt_required()
 #     def delete(self, player_id):
@@ -44,11 +45,12 @@ blp = Blueprint("players", __name__, description="Operations on the players")
 #         return player
 
 
-# @blp.route("/players/")
-# class PlayerList(MethodView):
-#     @blp.response(200, PlayerSchema(many=True))
-#     def get(self):
-#         return PlayerModel.query.all()
+@blp.route("/players/")
+class PlayerList(MethodView):
+    @blp.response(200, PlayerSchema(many=True))
+    def get(self):
+        return PlayerModel.query.all()
+
 
 #     @jwt_required()
 #     @blp.arguments(PlayerSchema)

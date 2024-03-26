@@ -7,3 +7,7 @@ Backend Web API application designed specifically for football club managers and
 ```bash
 pip install -r requirements.txt
 ```
+
+## Swagger docs
+
+path - /swagger-ui

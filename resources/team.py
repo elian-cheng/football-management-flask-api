@@ -12,11 +12,12 @@ from db import db
 blp = Blueprint("teams", __name__, description="Operations on the teams")
 
 
-# @blp.route("/teams/<int:team_id>")
-# class Team(MethodView):
-#     @blp.response(200, TeamSchema)
-#     def get(self, team_id):
-#         return TeamModel.query.get_or_404(team_id)
+@blp.route("/teams/<int:team_id>")
+class Team(MethodView):
+    @blp.response(200, TeamSchema)
+    def get(self, team_id):
+        return TeamModel.query.get_or_404(team_id)
+
 
 #     @jwt_required()
 #     def delete(self, team_id):
@@ -47,11 +48,12 @@ blp = Blueprint("teams", __name__, description="Operations on the teams")
 #         return team
 
 
-# @blp.route("/teams/")
-# class TeamList(MethodView):
-#     @blp.response(200, TeamSchema(many=True))
-#     def get(self):
-#         return TeamModel.query.all()
+@blp.route("/teams/")
+class TeamList(MethodView):
+    @blp.response(200, TeamSchema(many=True))
+    def get(self):
+        return TeamModel.query.all()
+
 
 #     @jwt_required()
 #     @blp.arguments(TeamSchema)
