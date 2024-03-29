@@ -1,13 +1,58 @@
-# football-management-flask-api
+## FC Manager REST API
 
-Backend Web API application designed specifically for football club managers and administrators. This application will feature functionality to create, store, and manage information about all the teams in the club and their players. User authentication functionality to enhance security and usability.
+API service for management Football Clubs written on Flask REST API. With functionality managing teams and players.
 
-## Install dependencies
+Features:
 
-```bash
+- JWT authenticated
+- Documentation is located via /swagger-ui/
+- Implementing 4 models with many-to-many and many-to-one relationships
+- Creating and updating teams and players of the club
+
+### Installing using GitHub:
+
+- Fork the project into your GitHub
+- Clone it into your desktop
+
+```
+git clone https://github.com/elian-cheng/football-management-flask-api.git
+cd football-management-flask-api
+```
+
+- Set up virtual environment
+
+```
+python3 -m venv venv
+source venv/bin/activate # for Unix-based system
+venv\Scripts\activate # for Windows
+```
+
+- Install requirements
+
+```
 pip install -r requirements.txt
 ```
 
-## Swagger docs
+- Open .env.example and change environment variables on yours! Rename the file from .env.example to .env
 
-path - /swagger-ui
+### Run API service
+
+```
+flask migrate
+flask run
+```
+
+### Getting access instructions:
+
+- Create a user via **/register/**
+- Get access token via **/login/**
+- Install **ModHeader** browser extension and create a Request header with the value **Authorization Bearer** `<Your access token>` to test with Swagger or use Postman
+
+###Used tech stack:
+
+- Flask
+- SQLAlchemy
+- SQLite
+- Black & Flake8
+- flask-smorest
+- marshmallow
